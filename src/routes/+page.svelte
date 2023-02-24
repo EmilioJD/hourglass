@@ -1,0 +1,7 @@
+<nav>
+	<a href="/">Start</a>
+	<a href="/timeline">Timeline</a>
+</nav>
+
+<h1>Start</h1>
+<p>This is the start page</p>
