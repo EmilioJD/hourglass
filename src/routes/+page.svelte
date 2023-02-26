@@ -5,6 +5,20 @@
 
 <script lang="ts">
     import { Form, FormGroup, Input, Label, Button } from 'sveltestrap';
+    import { goto } from '$app/navigation';
+
+    function onSubmit(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+
+        const data = {};
+        for (let field of formData) {
+        const [key, value] = field;
+        data[key] = value;
+        }
+        console.log(data)
+        // goto(`/timeline`);
+    }
 </script>
 
 <style>
@@ -27,7 +41,7 @@
 
 <div id='form'>
   
-  <Form>
+  <Form on:submit={(e) => {onSubmit(e)}}>
     <FormGroup>
         <Label for="name">Name</Label>
         <Input
@@ -133,6 +147,6 @@
             <option data-time-zone-id="82" data-gmt-adjustment="GMT+13:00">(GMT+13:00) Nuku'alofa</option>
         </Input>
     </FormGroup>
-    <Button color='primary'>Next: Enter Your Availability</Button>
+    <Button type='submit' color='primary'>Next: Enter Your Availability</Button>
   </Form>
 </div>
