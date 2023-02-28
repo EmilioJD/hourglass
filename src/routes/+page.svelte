@@ -7,17 +7,18 @@
     import { Form, FormGroup, Input, Label, Button } from 'sveltestrap';
     import { goto } from '$app/navigation';
 
+
     function onSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
 
         const data = {};
         for (let field of formData) {
-        const [key, value] = field;
-        data[key] = value;
+            const [key, value] = field;
+            data[key] = value;
         }
-        console.log(data)
-        // goto(`/timeline`);
+        // do something with data... store in database or stringified in local storage... stringifying availabilities might be hard
+        goto(`/timeline`);
     }
 </script>
 
@@ -45,7 +46,7 @@
     <FormGroup>
         <Label for="name">Name</Label>
         <Input
-          type="name"
+          type="text"
           name="name"
           id="name"
           placeholder="Name"
