@@ -43,33 +43,58 @@
 		<div class="elements selecto-area" id="selecto1">
 			<!-- Time Labels -->
 			<div class='labels'>
-				<p class='timestamp'>- 12am</p>
-				<p class='timestamp'>- 1am</p>
-				<p class='timestamp'>- 2am</p>
-				<p class='timestamp'>- 3am</p>
-				<p class='timestamp'>- 4am</p>
-				<p class='timestamp'>- 5am</p>
-				<p class='timestamp'>- 6am</p>
-				<p class='timestamp'>- 7am</p>
-				<p class='timestamp'>- 8am</p>
-				<p class='timestamp'>- 9am</p>
-				<p class='timestamp'>- 10am</p>
-				<p class='timestamp'>- 11am</p>
-				<p class='timestamp'>- 12pm</p>
-				<p class='timestamp'>- 1pm</p>
-				<p class='timestamp'>- 2pm</p>
-				<p class='timestamp'>- 3pm</p>
-				<p class='timestamp'>- 4pm</p>
-				<p class='timestamp'>- 5pm</p>
-				<p class='timestamp'>- 6pm</p>
-				<p class='timestamp'>- 7pm</p>
-				<p class='timestamp'>- 8pm</p>
-				<p class='timestamp'>- 9pm</p>
-				<p class='timestamp'>- 10pm</p>
-				<p class='timestamp'>- 11pm</p>
+				<p class='timestamp'>- 12:00 am</p>
+				<p class='timestamp'>- 12:30</p>
+				<p class='timestamp'>- 1:00</p>
+				<p class='timestamp'>- 1:30</p>
+				<p class='timestamp'>- 2:00</p>
+				<p class='timestamp'>- 2:30</p>
+				<p class='timestamp'>- 3:00</p>
+				<p class='timestamp'>- 3:30</p>
+				<p class='timestamp'>- 4:00</p>
+				<p class='timestamp'>- 4:30</p>
+				<p class='timestamp'>- 5:00</p>
+				<p class='timestamp'>- 5:30</p>
+				<p class='timestamp'>- 6:00</p>
+				<p class='timestamp'>- 6:30</p>
+				<p class='timestamp'>- 7:00</p>
+				<p class='timestamp'>- 7:30</p>
+				<p class='timestamp'>- 8:00</p>
+				<p class='timestamp'>- 8:30</p>
+				<p class='timestamp'>- 9:00</p>
+				<p class='timestamp'>- 9:30</p>
+				<p class='timestamp'>- 10:00</p>
+				<p class='timestamp'>- 10:30</p>
+				<p class='timestamp'>- 11:00</p>
+				<p class='timestamp'>- 11:30</p>
+				<p class='timestamp'>- 12:00 pm</p>
+				<p class='timestamp'>- 12:30</p>
+				<p class='timestamp'>- 1:00</p>
+				<p class='timestamp'>- 1:30</p>
+				<p class='timestamp'>- 2:00</p>
+				<p class='timestamp'>- 2:30</p>
+				<p class='timestamp'>- 3:00</p>
+				<p class='timestamp'>- 3:30</p>
+				<p class='timestamp'>- 4:00</p>
+				<p class='timestamp'>- 4:30</p>
+				<p class='timestamp'>- 5:00</p>
+				<p class='timestamp'>- 5:30</p>
+				<p class='timestamp'>- 6:00</p>
+				<p class='timestamp'>- 6:30</p>
+				<p class='timestamp'>- 7:00</p>
+				<p class='timestamp'>- 7:30</p>
+				<p class='timestamp'>- 8:00</p>
+				<p class='timestamp'>- 8:30</p>
+				<p class='timestamp'>- 9:00</p>
+				<p class='timestamp'>- 9:30</p>
+				<p class='timestamp'>- 10:00</p>
+				<p class='timestamp'>- 10:30</p>
+				<p class='timestamp'>- 11:00</p>
+				<p class='timestamp'>- 11:30</p>
+				<p class='timestamp'>- 12:00 am</p>
 			</div>
 			{#each cubes as cube}
-				<div class="cube M{cubes[cube]}">{cubes[cube]}</div>
+				<div class="cube M{cubes[cube]}"></div>
 			{/each}
 		</div>
 		<div class="empty elements" />
@@ -103,7 +128,7 @@
 	}
 
 	.container {
-		max-width: 80%;
+		max-width: 90%;
 	}
 
 	body {
@@ -121,19 +146,22 @@
 
 	.labels {
 		display: flex;
-		flex-direction: row;
-		/* padding: 0; */
-		margin-left: 4px;
+		justify-content: center;
+		margin: auto;
+		width: auto;
+		margin-left: 0;
 		margin-bottom: 10;
 		text-align: left;
 	}
 
 	.timestamp {
-		margin-left: 0;
-		margin-right: 5;
+		margin-left: 0px;
+		margin-top: 0;
+		margin-right: 2.5px;
+		margin-bottom: 2px;
         writing-mode: tb-rl;
-        transform: rotate(-180deg);
-		font-size: 5;
+        transform: rotate(180deg);
+		font-size: 13px;
 		/* margin-bottom: 20; */
 		/* padding: 0; */
 		/* writing-mode: vertical-lr;
@@ -143,7 +171,7 @@
 	.cube {
 		display: inline-block;
 		border-radius: 0px;
-		width: 10px;
+		width: 11px;
 		height: 40px;
 		margin: 0px;
 		box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black;
