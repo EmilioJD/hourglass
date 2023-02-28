@@ -69,7 +69,7 @@
 				<p class='timestamp'>- 11pm</p>
 			</div>
 			{#each cubes as cube}
-				<div class="cube M{cubes[cube]}">{cubes[cube]}</div>
+				<div class="cube M{cubes[cube]}"></div>
 			{/each}
 		</div>
 		<div class="empty elements" />
