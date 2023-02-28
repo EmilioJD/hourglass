@@ -3,7 +3,7 @@
 
 	const cubes = [];
 
-	for (let i = 0; i < 30; ++i) {
+	for (let i = 0; i < 96; ++i) {
 		cubes.push(i);
 	}
 </script>
@@ -36,8 +36,35 @@
 		/>
 <!-- D0000, D0015, D0030 .. D2400 -->
 		<div class="elements selecto-area" id="selecto1">
+			<!-- Time Labels -->
+			<div class='labels'>
+				<p class='timestamp'>- 12am</p>
+				<p class='timestamp'>- 1am</p>
+				<p class='timestamp'>- 2am</p>
+				<p class='timestamp'>- 3am</p>
+				<p class='timestamp'>- 4am</p>
+				<p class='timestamp'>- 5am</p>
+				<p class='timestamp'>- 6am</p>
+				<p class='timestamp'>- 7am</p>
+				<p class='timestamp'>- 8am</p>
+				<p class='timestamp'>- 9am</p>
+				<p class='timestamp'>- 10am</p>
+				<p class='timestamp'>- 11am</p>
+				<p class='timestamp'>- 12pm</p>
+				<p class='timestamp'>- 1pm</p>
+				<p class='timestamp'>- 2pm</p>
+				<p class='timestamp'>- 3pm</p>
+				<p class='timestamp'>- 4pm</p>
+				<p class='timestamp'>- 5pm</p>
+				<p class='timestamp'>- 6pm</p>
+				<p class='timestamp'>- 7pm</p>
+				<p class='timestamp'>- 8pm</p>
+				<p class='timestamp'>- 9pm</p>
+				<p class='timestamp'>- 10pm</p>
+				<p class='timestamp'>- 11pm</p>
+			</div>
 			{#each cubes as cube}
-				<div class="cube {cubes[cube]}">{cubes[cube]}</div>
+				<div class="cube {cubes[cube]}" id={cube}></div>
 			{/each}
 		</div>
 		<div class="empty elements" />
@@ -68,7 +95,7 @@
 	}
 
 	.container {
-		max-width: 800px;
+		max-width: 80%;
 	}
 
 	body {
@@ -84,10 +111,31 @@
 		text-align: left;
 	}
 
+	.labels {
+		display: flex;
+		flex-direction: row;
+		/* padding: 0; */
+		margin-left: 4px;
+		margin-bottom: 10;
+		text-align: left;
+	}
+
+	.timestamp {
+		margin-left: 0;
+		margin-right: 5;
+        writing-mode: tb-rl;
+        transform: rotate(-180deg);
+		font-size: 5;
+		/* margin-bottom: 20; */
+		/* padding: 0; */
+		/* writing-mode: vertical-lr;
+		text-orientation: mixed; */
+	}
+
 	.cube {
 		display: inline-block;
 		border-radius: 0px;
-		width: 40px;
+		width: 10px;
 		height: 40px;
 		margin: 0px;
 		box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black;
@@ -127,7 +175,8 @@
 	}
 
 	.selecto-area {
-		padding: 100px;
+		/* width: 150%; */
+		padding: 50px;
 	}
 
 	#selecto1 .cube {
