@@ -1,11 +1,13 @@
+<!-- adapted from https://daybrush.com/selecto/storybook/?path=/story/selecto--continue-to-select -->
 <script>
 	import Selecto from 'svelte-selecto';
 
 	const cubes = [];
 
-	for (let i = 0; i < 30; ++i) {
+	for (let i = 0; i < 5; ++i) {
 		cubes.push(i);
 	}
+	let arr = [];
 </script>
 
 <nav>
@@ -26,21 +28,27 @@
 			on:select={({ detail: e }) => {
 				e.added.forEach((el) => {
 					el.classList.add('selected');
-					console.log(e);
-					// console.log("selected")
+					let value = el.classList[1];
+					arr.push(value);
+					// console.log(arr);
 				});
 				e.removed.forEach((el) => {
 					el.classList.remove('selected');
+					let value = el.classList[1];
+					arr = arr.filter(item => item !== value);
 				});
 			}}
 		/>
 <!-- D0000, D0015, D0030 .. D2400 -->
 		<div class="elements selecto-area" id="selecto1">
 			{#each cubes as cube}
-				<div class="cube {cubes[cube]}">{cubes[cube]}</div>
+				<div class="cube M{cubes[cube]}">{cubes[cube]}</div>
 			{/each}
 		</div>
 		<div class="empty elements" />
+		<button on:click={()=>console.log(arr)}>
+			Print Selected Times
+		</button>
 	</div>
 </div>
 
