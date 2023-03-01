@@ -1,6 +1,7 @@
 <!-- adapted from https://daybrush.com/selecto/storybook/?path=/story/selecto--continue-to-select -->
 <script>
 	import Selecto from 'svelte-selecto';
+	import { Input } from 'sveltestrap';
 
 	const cubes = [];
 
@@ -8,6 +9,8 @@
 		cubes.push(i);
 	}
 	let arr = [];
+
+	let ifNeedBe = false;
 </script>
 
 <nav>
@@ -28,12 +31,14 @@
 			on:select={({ detail: e }) => {
 				e.added.forEach((el) => {
 					el.classList.add('selected');
+					el.classList.add(ifNeedBe ? 'pref0' : 'pref1');
 					let value = el.classList[1];
 					arr.push(value);
-					// console.log(arr);
 				});
 				e.removed.forEach((el) => {
 					el.classList.remove('selected');
+					el.classList.remove('pref1');
+					el.classList.remove('pref0');
 					let value = el.classList[1];
 					arr = arr.filter(item => item !== value);
 				});
@@ -141,6 +146,9 @@
 			</div>
 		</div>
 		<div class="empty elements" />
+		<div class='togglediv'>
+			<Input class='toggle' id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe}/>
+		</div>
 		<button on:click={()=>console.log(arr)}>
 			Print Selected Times
 		</button>
@@ -197,6 +205,22 @@
 		text-align: left;
 	}
 
+	.togglediv { 
+		width: 15%;
+	}
+
+	.toggle {
+		background-color: #e6b400;
+		color: #e6b400;
+		border-color: #e6b400;
+	}
+
+	.switch.form-check-input {
+		background-color: #e6b400;
+		color: #e6b400;
+		border-color: #e6b400;
+	}
+
 	.timestamp {
 		margin-left: 0px;
 		margin-top: 0;
@@ -219,7 +243,15 @@
 		margin: 0px;
 		box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black;
 		background: #eee;
+		/* --color: #4af; */
+	}
+
+	.pref1 {
 		--color: #4af;
+	}
+
+	.pref0 {
+		--color: #e6b400;
 	}
 
 	h1,
