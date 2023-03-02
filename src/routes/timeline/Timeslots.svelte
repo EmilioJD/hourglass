@@ -147,9 +147,9 @@
                 {/each}
             </div>
         </div>
-        <div class='togglediv'>
-			<Input class='toggle' id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe}/>
-		</div>
+    </div>
+    <div class='togglediv'>
+        <Input class='toggle' id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe}/>
     </div>
 </div>
 
