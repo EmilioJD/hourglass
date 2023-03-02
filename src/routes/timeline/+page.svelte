@@ -1,6 +1,7 @@
 <!-- adapted from https://daybrush.com/selecto/storybook/?path=/story/selecto--continue-to-select -->
 <script>
 	import Selecto from 'svelte-selecto';
+	import Timeslots from './Timeslots.svelte';
 
 	const cubes = [];
 
@@ -40,6 +41,7 @@
 			}}
 		/>
 <!-- D0000, D0015, D0030 .. D2400 -->
+		<Timeslots></Timeslots>
 		<div class="elements selecto-area" id="selecto1">
 			<div class='left'>
 				<p class='day'>Sun</p>
