@@ -1,7 +1,10 @@
 <script context='module'>
 	// import { time } from 'console';
+    import { Input } from 'sveltestrap';
     import Selecto from 'svelte-selecto';
     const timeslots = [];
+
+    let ifNeedBe = false;
 
     for (let i = 0; i < 96; ++i) {
 		timeslots.push(i);
@@ -53,6 +56,8 @@
         on:select={({ detail: e }) => {
             e.added.forEach((el) => {
                 el.classList.add('selected');
+                el.classList.add(ifNeedBe ? 'pref0' : 'pref1');
+                console.log(el.classList);
                 let value = el.classList[1];
                 selectedTimeslots.push(value);
                 allTimeslots[value] = 1;
@@ -60,6 +65,8 @@
             });
             e.removed.forEach((el) => {
                 el.classList.remove('selected');
+                el.classList.remove('pref1');
+				el.classList.remove('pref0');
                 let value = el.classList[1];
                 selectedTimeslots = selectedTimeslots.filter(item => item !== value);
                 allTimeslots[value] = 0;
@@ -141,6 +148,9 @@
             </div>
         </div>
     </div>
+    <div class='togglediv'>
+        <Input class='toggle' id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe}/>
+    </div>
 </div>
 
 <style>
@@ -182,6 +192,30 @@
 		text-align: left;
 	}
 
+    .togglediv { 
+		width: 15%;
+	}
+
+	.toggle {
+		background-color: #e6b400;
+		color: #e6b400;
+		border-color: #e6b400;
+	}
+
+	.switch.form-check-input {
+		background-color: #e6b400;
+		color: #e6b400;
+		border-color: #e6b400;
+	}
+
+    .pref1 {
+		--color: #4af;
+	}
+
+	.pref0 {
+		--color: #e6b400;
+	}
+
 	.timestamp {
 		margin-left: 0px;
 		margin-top: 0;
@@ -204,7 +238,6 @@
 		margin: 0px;
 		box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black;
 		background: #eee;
-		--color: #4af;
 	}
 
 	h1,
