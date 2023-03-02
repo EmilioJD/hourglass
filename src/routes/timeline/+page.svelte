@@ -219,7 +219,7 @@
 		width: 11px;
 		height: 40px;
 		margin: 0px;
-		box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black;
+		box-shadow: -0.5px 0px 0px 0px black, 0.5px 0px 0px 0px black;
 		background: #eee;
 		--color: #4af;
 	}
