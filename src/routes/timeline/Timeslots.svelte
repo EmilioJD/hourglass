@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-<script>
-    //01234
-	// let states = [1,0,1,1,0];
-	//returns 0-1, 2-4, single tuple
-    //should return [[0,1],[2,4]] tuples 
-    let states = [1,1,1,1,1,1,1,1,1,0];
-
-    //TODO: handle 1s at the end 
-    //location helper
-	function func(list) {
-=======
 <script context='module'>
 	// import { time } from 'console';
     import Selecto from 'svelte-selecto';
@@ -23,18 +11,12 @@
     let selectedTimeslots = [];
 
     function mergeTimeslots(list) {
->>>>>>> b845a96022ea538f35c875d947a9439f3c135ee1
         let newBlock = true;
         let tuples = [];
         let tuple = [0,0];
 
-<<<<<<< HEAD
-		for (let i = 0; i <= list.length; i++) {
-            let curr = list[i];
-=======
 		for (let i = 0; i < list.length; i++) {
             let curr = list[i]
->>>>>>> b845a96022ea538f35c875d947a9439f3c135ee1
             if (curr == 1 && newBlock) {
                 tuple[0] = i;
                 newBlock = false;
@@ -44,13 +26,8 @@
             }
             else if (curr == 0 && !newBlock){
                 tuple[1] = i;
-<<<<<<< HEAD
-                tuples.push([tuple[0], tuple[1]]);
-                console.log(JSON.stringify(tuples));
-=======
                 let newTuple = [tuple[0], tuple[1]];
                 tuples.push(newTuple);
->>>>>>> b845a96022ea538f35c875d947a9439f3c135ee1
                 newBlock = true;
             }
 		}
