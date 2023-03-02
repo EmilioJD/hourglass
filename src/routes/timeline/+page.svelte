@@ -1,6 +1,11 @@
 <!-- adapted from https://daybrush.com/selecto/storybook/?path=/story/selecto--continue-to-select -->
 <script>
 	import Timeslots, { mergedTimeslots } from './Timeslots.svelte';
+	import { goto } from '$app/navigation';
+
+	function handleSave() {
+		goto(`/`);
+	}
 </script>
 
 <nav>
@@ -13,6 +18,7 @@
 	<button on:click={()=>{console.log(mergedTimeslots)}}>
         Print Selected Times
     </button>
+	<button on:click={() => handleSave()}>Save and Logout</button>
 </div>
 
 <style>
