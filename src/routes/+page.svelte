@@ -3,10 +3,11 @@
 	<a href="/timeline">Timeline</a>
 </nav>
 
-<script lang="ts" context='module'>
+<script lang="ts" context='module' context='module'>
     import { Form, FormGroup, Input, Label, Button } from 'sveltestrap';
     import { goto } from '$app/navigation';
 
+    export let currUserEmail = '';
     export let timeZone = '';
 
     function onSubmit(e) {
@@ -18,10 +19,11 @@
             const [key, value] = field;
             data[key] = value;
         }
+
     
         timeZone = data["timeZone"];
         
-        // do something with data... store in database or stringified in local storage... stringifying availabilities might be hard
+        currUserEmail = data['email'];
         goto(`/timeline`);
     }
 </script>
@@ -39,7 +41,9 @@
 
 
 <div id='title'>
-    <h1>Event: Example Meeting</h1>
+    <h1>Event: Sample 30-Minute Meeting</h1>
+
+    <h6>Organizer wants to know your availability from 6am - 10pm ET.</h6>
 </div>
 
 <br/>

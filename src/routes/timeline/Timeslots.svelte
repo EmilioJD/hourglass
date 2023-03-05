@@ -5,18 +5,18 @@
 
 	const timeslots = [];
 
-	let ifNeedBe = false;
-	let allTimeslots = new Array(672).fill(0);
-	let selectedTimeslots = [];
+    let ifNeedBe = false;
 	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-	for (let i = 0; i < 96; ++i) {
+	// only 6am - 10pm ET times (organizer)
+	for (let i = 0; i < 32; ++i) {
 		timeslots.push(i);
 	}
 
-	//[0,0,0,1]
-	//00001
-	//011111
+    // allTimeslots[i] = 1 if preferred, 0.5 if need be, and 0 if not available
+    export var allTimeslots = new Array(224).fill(0);
+    let selectedTimeslots = [];
+
 	function mergeTimeslots(list) {
 		let newBlock = true;
 		let tuples = [];
@@ -51,30 +51,36 @@
 	function handleSelectChange() {
 		mergedTimeslots = mergeTimeslots(allTimeslots);
 	}
+
+	export function resetUserVars() {
+		// resetting user vars
+		allTimeslots = new Array(224).fill(0);
+		mergedTimeslots = [];
+		ifNeedBe = false;
+	}
 </script>
 
 <div class="container">
-	<Selecto
-		dragContainer={'.elements'}
-		selectableTargets={['.selecto-area .cube']}
-		hitRate={1}
-		selectByClick={true}
-		selectFromInside={true}
-		continueSelect={true}
-		ratio={0}
-		on:select={({ detail: e }) => {
-			e.added.forEach((el) => {
-				el.classList.add('selected');
-				el.classList.add(ifNeedBe ? 'pref0' : 'pref1');
-				// console.log(el.classList);
-				let value = el.classList[1];
-				selectedTimeslots.push(value);
-				allTimeslots[value] = 1;
-				handleSelectChange();
-			});
-			e.removed.forEach((el) => {
-				el.classList.remove('selected');
-				el.classList.remove('pref1');
+    <Selecto
+        dragContainer={'.elements'}
+        selectableTargets={['.selecto-area .cube']}
+        hitRate={1}
+        selectByClick={true}
+        selectFromInside={true}
+        continueSelect={true}
+        ratio={0}
+        on:select={({ detail: e }) => {
+            e.added.forEach((el) => {
+                el.classList.add('selected');
+                el.classList.add(ifNeedBe ? 'pref0' : 'pref1');
+                let value = el.classList[1];
+                selectedTimeslots.push(value);
+                allTimeslots[value] = ifNeedBe ? 0.5 : 1;
+                handleSelectChange();
+            });
+            e.removed.forEach((el) => {
+                el.classList.remove('selected');
+                el.classList.remove('pref1');
 				el.classList.remove('pref0');
 				let value = el.classList[1];
 				selectedTimeslots = selectedTimeslots.filter((item) => item !== value);
@@ -175,12 +181,11 @@
 	.cube {
 		display: inline-block;
 		border-radius: 0px;
-		width: 11px;
+		width: 33px;
 		height: 40px;
 		margin: 0px;
 		box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black;
 		background: #eee;
-		--color: #4af;
 	}
 
 	.button {

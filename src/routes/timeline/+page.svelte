@@ -1,7 +1,28 @@
 <!-- adapted from https://daybrush.com/selecto/storybook/?path=/story/selecto--continue-to-select -->
 <script>
-	import Timeslots, { mergedTimeslots } from './Timeslots.svelte';
+	import Timeslots, { mergedTimeslots, allTimeslots, resetUserVars } from './Timeslots.svelte';
+	import { currUserEmail } from '../+page.svelte';
+
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+ 	import { writable } from 'svelte/store';
+
+	import { votesArray } from '../../stores';
+
+	const len = 7 * 32;
+
+	function updateVotes(votesArray) {
+		var summedArrays = votesArray.map(function (num, idx) {
+			return num + allTimeslots[idx];
+		});
+		resetUserVars();
+		return summedArrays;
+	}
+
+	function resetVotes() {
+		const empty = new Array(len).fill(0);
+		votesArray.update(n => empty)
+	}
 	import { timeZone } from '../+page.svelte'
 
 	let timeZoneOffset = parseInt(timeZone.substr(4,3)) + 5;
@@ -9,6 +30,10 @@
 	//this variable needs to be passed into Timestamp
 
 	function handleSave() {
+		if (browser) {
+			window.localStorage.setItem(currUserEmail, allTimeslots.toString());
+		}
+		votesArray.update(n => updateVotes(n))
 		goto(`/`);
 	}
 </script>
@@ -20,10 +45,11 @@
 
 <div class="app">
 	<Timeslots></Timeslots>
-	<button on:click={()=>{console.log(mergedTimeslots)}}>
+	<button on:click={()=>{console.log(mergedTimeslots, allTimeslots)}}>
         Print Selected Times
     </button>
 	<button on:click={() => handleSave()}>Save and Logout</button>
+	<button on:click={() => resetVotes()}>Reset Vote Count (don't press this)</button>
 </div>
 
 <style>
