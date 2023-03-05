@@ -3,10 +3,11 @@
 	<a href="/timeline">Timeline</a>
 </nav>
 
-<script lang="ts">
+<script lang="ts" context='module'>
     import { Form, FormGroup, Input, Label, Button } from 'sveltestrap';
     import { goto } from '$app/navigation';
 
+    export let timeZone = '';
 
     function onSubmit(e) {
         e.preventDefault();
@@ -17,6 +18,9 @@
             const [key, value] = field;
             data[key] = value;
         }
+    
+        timeZone = data["timeZone"];
+        
         // do something with data... store in database or stringified in local storage... stringifying availabilities might be hard
         goto(`/timeline`);
     }
@@ -67,12 +71,12 @@
             <option data-time-zone-id="2" data-gmt-adjustment="GMT-11:00">(GMT-11:00) Midway Island, Samoa</option>
             <option data-time-zone-id="3" data-gmt-adjustment="GMT-10:00">(GMT-10:00) Hawaii</option>
             <option data-time-zone-id="1" data-gmt-adjustment="GMT-12:00">(GMT-12:00) International Date Line West</option>
-            <option data-time-zone-id="4" data-gmt-adjustment="GMT-09:00"> (GMT-09:00) Alaska</option>
-            <option data-time-zone-id="5" data-gmt-adjustment="GMT-08:00"> (GMT-08:00) Pacific Time (US & Canada)</option>
-            <option data-time-zone-id="6" data-gmt-adjustment="GMT-08:00"> (GMT-08:00) Tijuana, Baja California</option>
-            <option data-time-zone-id="7" data-gmt-adjustment="GMT-07:00"> (GMT-07:00) Arizona</option>
-            <option data-time-zone-id="8" data-gmt-adjustment="GMT-07:00"> (GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-            <option data-time-zone-id="9" data-gmt-adjustment="GMT-07:00"> (GMT-07:00) Mountain Time (US & Canada)</option>
+            <option data-time-zone-id="4" data-gmt-adjustment="GMT-09:00">(GMT-09:00) Alaska</option>
+            <option data-time-zone-id="5" data-gmt-adjustment="GMT-08:00">(GMT-08:00) Pacific Time (US & Canada)</option>
+            <option data-time-zone-id="6" data-gmt-adjustment="GMT-08:00">(GMT-08:00) Tijuana, Baja California</option>
+            <option data-time-zone-id="7" data-gmt-adjustment="GMT-07:00">(GMT-07:00) Arizona</option>
+            <option data-time-zone-id="8" data-gmt-adjustment="GMT-07:00">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
+            <option data-time-zone-id="9" data-gmt-adjustment="GMT-07:00">(GMT-07:00) Mountain Time (US & Canada)</option>
             <option data-time-zone-id="10" data-gmt-adjustment="GMT-06:00">(GMT-06:00) Central America</option>
             <option data-time-zone-id="11" data-gmt-adjustment="GMT-06:00">(GMT-06:00) Central Time (US & Canada)</option>
             <option data-time-zone-id="12" data-gmt-adjustment="GMT-06:00">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>

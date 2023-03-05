@@ -1,12 +1,11 @@
 <script context="module">
-    import { Input } from 'sveltestrap';
+	import { Input } from 'sveltestrap';
 	import Selecto from 'svelte-selecto';
 	import Timestamp from './labels/Timestamp.svelte';
-    import Match from "./Match.svelte"
 
 	const timeslots = [];
 
-    let ifNeedBe = false;
+	let ifNeedBe = false;
 	let allTimeslots = new Array(672).fill(0);
 	let selectedTimeslots = [];
 	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -15,6 +14,9 @@
 		timeslots.push(i);
 	}
 
+	//[0,0,0,1]
+	//00001
+	//011111
 	function mergeTimeslots(list) {
 		let newBlock = true;
 		let tuples = [];
@@ -25,9 +27,16 @@
 			if (curr == 1 && newBlock) {
 				tuple[0] = i;
 				newBlock = false;
+
+				//the case where they are only available at the last block
+				if (i == list.length - 1) {
+					tuple[1] = i;
+					let newTuple = [tuple[0], tuple[1]];
+					tuples.push(newTuple);
+				}
 				//this is the location handling step
 			} else if (curr == 0 && newBlock) {
-			} else if (curr == 0 && !newBlock) {
+			} else if ((curr == 0 && !newBlock) || i == list.length - 1) {
 				tuple[1] = i;
 				let newTuple = [tuple[0], tuple[1]];
 				tuples.push(newTuple);
@@ -45,35 +54,35 @@
 </script>
 
 <div class="container">
-    <Selecto
-        dragContainer={'.elements'}
-        selectableTargets={['.selecto-area .cube']}
-        hitRate={1}
-        selectByClick={true}
-        selectFromInside={true}
-        continueSelect={true}
-        ratio={0}
-        on:select={({ detail: e }) => {
-            e.added.forEach((el) => {
-                el.classList.add('selected');
-                el.classList.add(ifNeedBe ? 'pref0' : 'pref1');
-                console.log(el.classList);
-                let value = el.classList[1];
-                selectedTimeslots.push(value);
-                allTimeslots[value] = 1;
-                handleSelectChange();
-            });
-            e.removed.forEach((el) => {
-                el.classList.remove('selected');
-                el.classList.remove('pref1');
+	<Selecto
+		dragContainer={'.elements'}
+		selectableTargets={['.selecto-area .cube']}
+		hitRate={1}
+		selectByClick={true}
+		selectFromInside={true}
+		continueSelect={true}
+		ratio={0}
+		on:select={({ detail: e }) => {
+			e.added.forEach((el) => {
+				el.classList.add('selected');
+				el.classList.add(ifNeedBe ? 'pref0' : 'pref1');
+				// console.log(el.classList);
+				let value = el.classList[1];
+				selectedTimeslots.push(value);
+				allTimeslots[value] = 1;
+				handleSelectChange();
+			});
+			e.removed.forEach((el) => {
+				el.classList.remove('selected');
+				el.classList.remove('pref1');
 				el.classList.remove('pref0');
-                let value = el.classList[1];
-                selectedTimeslots = selectedTimeslots.filter(item => item !== value);
-                allTimeslots[value] = 0;
-                handleSelectChange();
-            });
-        }}
-    />
+				let value = el.classList[1];
+				selectedTimeslots = selectedTimeslots.filter((item) => item !== value);
+				allTimeslots[value] = 0;
+				handleSelectChange();
+			});
+		}}
+	/>
 
 	<div class="elements selecto-area" id="selecto1">
 		<div class="left">
@@ -83,11 +92,7 @@
 		</div>
 		<div class="right">
 			<div class="labels">
-				<p class="timestamp">- 12:00 am</p>
 				<Timestamp />
-				<p class="timestamp">- 12:00 pm</p>
-				<Timestamp />
-				<p class="timestamp">- 12:00 am</p>
 			</div>
 			<div>
 				{#each Array(7) as _, i}
@@ -98,12 +103,11 @@
 					</div>
 				{/each}
 			</div>
-            <Match></Match>
 		</div>
 	</div>
-    <div class='togglediv'>
-        <Input class='toggle' id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe}/>
-    </div>
+	<div class="togglediv">
+		<Input class="toggle" id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe} />
+	</div>
 </div>
 
 <style>
@@ -130,7 +134,7 @@
 		text-align: left;
 	}
 
-    .togglediv { 
+	.togglediv {
 		width: 15%;
 	}
 
@@ -146,7 +150,7 @@
 		border-color: #e6b400;
 	}
 
-    .pref1 {
+	.pref1 {
 		--color: #4af;
 	}
 

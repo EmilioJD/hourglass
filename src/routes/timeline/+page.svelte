@@ -2,6 +2,11 @@
 <script>
 	import Timeslots, { mergedTimeslots } from './Timeslots.svelte';
 	import { goto } from '$app/navigation';
+	import { timeZone } from '../+page.svelte'
+
+	let timeZoneOffset = parseInt(timeZone.substr(4,3)) + 5;
+	console.log(timeZoneOffset);
+	//this variable needs to be passed into Timestamp
 
 	function handleSave() {
 		goto(`/`);
