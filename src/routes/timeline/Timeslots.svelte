@@ -1,12 +1,15 @@
-<script context='module'>
-	// import { time } from 'console';
+<script context="module">
     import { Input } from 'sveltestrap';
-    import Selecto from 'svelte-selecto';
-    const timeslots = [];
+	import Selecto from 'svelte-selecto';
+	import Timestamp from './labels/Timestamp.svelte';
+    import Match from "./Match.svelte"
+
+	const timeslots = [];
 
     let ifNeedBe = false;
+	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-    for (let i = 0; i < 96; ++i) {
+	for (let i = 0; i < 96; ++i) {
 		timeslots.push(i);
 	}
 
@@ -14,35 +17,33 @@
     export var allTimeslots = new Array(672).fill(0);
     let selectedTimeslots = [];
 
-    function mergeTimeslots(list) {
-        let newBlock = true;
-        let tuples = [];
-        let tuple = [0,0];
+	function mergeTimeslots(list) {
+		let newBlock = true;
+		let tuples = [];
+		let tuple = [0, 0];
 
 		for (let i = 0; i < list.length; i++) {
-            let curr = list[i]
-            if (curr != 0 && newBlock) {
-                tuple[0] = i;
-                newBlock = false;
-            }
-            else if (curr == 0 && newBlock){
-            }
-            else if (curr == 0 && !newBlock){
-                tuple[1] = i;
-                let newTuple = [tuple[0], tuple[1]];
-                tuples.push(newTuple);
-                newBlock = true;
-            }
+			let curr = list[i];
+			if (curr == 1 && newBlock) {
+				tuple[0] = i;
+				newBlock = false;
+				//this is the location handling step
+			} else if (curr == 0 && newBlock) {
+			} else if (curr == 0 && !newBlock) {
+				tuple[1] = i;
+				let newTuple = [tuple[0], tuple[1]];
+				tuples.push(newTuple);
+				newBlock = true;
+			}
 		}
-        return tuples;
+		return tuples;
 	}
 
-    export var mergedTimeslots = []
+	export var mergedTimeslots = [];
 
-    function handleSelectChange() {
-        mergedTimeslots = mergeTimeslots(allTimeslots);
-        // console.log(mergedTimeslots);
-    }
+	function handleSelectChange() {
+		mergedTimeslots = mergeTimeslots(allTimeslots);
+	}
 </script>
 
 <div class="container">
@@ -75,102 +76,40 @@
         }}
     />
 
-    <div class="elements selecto-area" id="selecto1">
-        <div class='left'>
-            <p class='day'>Sun</p>
-            <p class='day'>Mon</p>
-            <p class='day'>Tue</p>
-            <p class='day'>Wed</p>
-            <p class='day'>Thu</p>
-            <p class='day'>Fri</p>
-            <p class='day'>Sat</p>
-        </div>
-        <div class='right'>
-            <div class='labels'>
-                <p class='timestamp'>- 12:00 am</p>
-                <p class='timestamp'>- 12:30</p>
-                <p class='timestamp'>- 1:00</p>
-                <p class='timestamp'>- 1:30</p>
-                <p class='timestamp'>- 2:00</p>
-                <p class='timestamp'>- 2:30</p>
-                <p class='timestamp'>- 3:00</p>
-                <p class='timestamp'>- 3:30</p>
-                <p class='timestamp'>- 4:00</p>
-                <p class='timestamp'>- 4:30</p>
-                <p class='timestamp'>- 5:00</p>
-                <p class='timestamp'>- 5:30</p>
-                <p class='timestamp'>- 6:00</p>
-                <p class='timestamp'>- 6:30</p>
-                <p class='timestamp'>- 7:00</p>
-                <p class='timestamp'>- 7:30</p>
-                <p class='timestamp'>- 8:00</p>
-                <p class='timestamp'>- 8:30</p>
-                <p class='timestamp'>- 9:00</p>
-                <p class='timestamp'>- 9:30</p>
-                <p class='timestamp'>- 10:00</p>
-                <p class='timestamp'>- 10:30</p>
-                <p class='timestamp'>- 11:00</p>
-                <p class='timestamp'>- 11:30</p>
-                <p class='timestamp'>- 12:00 pm</p>
-                <p class='timestamp'>- 12:30</p>
-                <p class='timestamp'>- 1:00</p>
-                <p class='timestamp'>- 1:30</p>
-                <p class='timestamp'>- 2:00</p>
-                <p class='timestamp'>- 2:30</p>
-                <p class='timestamp'>- 3:00</p>
-                <p class='timestamp'>- 3:30</p>
-                <p class='timestamp'>- 4:00</p>
-                <p class='timestamp'>- 4:30</p>
-                <p class='timestamp'>- 5:00</p>
-                <p class='timestamp'>- 5:30</p>
-                <p class='timestamp'>- 6:00</p>
-                <p class='timestamp'>- 6:30</p>
-                <p class='timestamp'>- 7:00</p>
-                <p class='timestamp'>- 7:30</p>
-                <p class='timestamp'>- 8:00</p>
-                <p class='timestamp'>- 8:30</p>
-                <p class='timestamp'>- 9:00</p>
-                <p class='timestamp'>- 9:30</p>
-                <p class='timestamp'>- 10:00</p>
-                <p class='timestamp'>- 10:30</p>
-                <p class='timestamp'>- 11:00</p>
-                <p class='timestamp'>- 11:30</p>
-                <p class='timestamp'>- 12:00 am</p>
-            </div>
-            <div>
-                {#each Array(7) as _, i}
-                    <div>
-                        {#each timeslots as slot}
-                            <div class="cube {(96 * i) + slot} "></div>
-                        {/each}
-                    </div>
-                {/each}
-            </div>
-        </div>
-    </div>
+	<div class="elements selecto-area" id="selecto1">
+		<div class="left">
+			{#each days as day}
+				<p class="day">{day}</p>
+			{/each}
+		</div>
+		<div class="right">
+			<div class="labels">
+				<p class="timestamp">- 12:00 am</p>
+				<Timestamp />
+				<p class="timestamp">- 12:00 pm</p>
+				<Timestamp />
+				<p class="timestamp">- 12:00 am</p>
+			</div>
+			<div>
+				{#each Array(7) as _, i}
+					<div>
+						{#each timeslots as slot}
+							<div class="cube {96 * i + slot} " />
+						{/each}
+					</div>
+				{/each}
+			</div>
+            <Match></Match>
+		</div>
+	</div>
     <div class='togglediv'>
         <Input class='toggle' id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe}/>
     </div>
 </div>
 
 <style>
-	html,
-	body,
-	#root {
-		position: relative;
-		margin: 0;
-		padding: 0;
-		height: 100%;
-		color: #333;
-		background: #fdfdfd;
-	}
-
 	.container {
 		max-width: 90%;
-	}
-
-	body {
-		background: #fff;
 	}
 
 	.logo {
@@ -221,8 +160,8 @@
 		margin-top: 0;
 		margin-right: 2.5px;
 		margin-bottom: 2px;
-        writing-mode: tb-rl;
-        transform: rotate(180deg);
+		writing-mode: tb-rl;
+		transform: rotate(180deg);
 		font-size: 13px;
 		/* margin-bottom: 20; */
 		/* padding: 0; */
@@ -238,11 +177,7 @@
 		margin: 0px;
 		box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black;
 		background: #eee;
-	}
-
-	h1,
-	.description {
-		text-align: center;
+		--color: #4af;
 	}
 
 	.button {
@@ -313,10 +248,6 @@
 		width: 100%;
 		height: 300px;
 		box-sizing: border-box;
-	}
-
-	.infinite-viewer .viewport {
-		padding-top: 10px;
 	}
 
 	.empty.elements {
