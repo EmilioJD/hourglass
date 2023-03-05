@@ -23,6 +23,11 @@
 		const empty = new Array(len).fill(0);
 		votesArray.update(n => empty)
 	}
+	import { timeZone } from '../+page.svelte'
+
+	let timeZoneOffset = parseInt(timeZone.substr(4,3)) + 5;
+	console.log(timeZoneOffset);
+	//this variable needs to be passed into Timestamp
 
 	function handleSave() {
 		if (browser) {

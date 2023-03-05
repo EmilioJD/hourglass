@@ -1,8 +1,7 @@
 <script context="module">
-    import { Input } from 'sveltestrap';
+	import { Input } from 'sveltestrap';
 	import Selecto from 'svelte-selecto';
 	import Timestamp from './labels/Timestamp.svelte';
-    import Match from "./Match.svelte"
 
 	const timeslots = [];
 
@@ -28,9 +27,16 @@
 			if (curr == 1 && newBlock) {
 				tuple[0] = i;
 				newBlock = false;
+
+				//the case where they are only available at the last block
+				if (i == list.length - 1) {
+					tuple[1] = i;
+					let newTuple = [tuple[0], tuple[1]];
+					tuples.push(newTuple);
+				}
 				//this is the location handling step
 			} else if (curr == 0 && newBlock) {
-			} else if (curr == 0 && !newBlock) {
+			} else if ((curr == 0 && !newBlock) || i == list.length - 1) {
 				tuple[1] = i;
 				let newTuple = [tuple[0], tuple[1]];
 				tuples.push(newTuple);
@@ -76,13 +82,13 @@
                 el.classList.remove('selected');
                 el.classList.remove('pref1');
 				el.classList.remove('pref0');
-                let value = el.classList[1];
-                selectedTimeslots = selectedTimeslots.filter(item => item !== value);
-                allTimeslots[value] = 0;
-                handleSelectChange();
-            });
-        }}
-    />
+				let value = el.classList[1];
+				selectedTimeslots = selectedTimeslots.filter((item) => item !== value);
+				allTimeslots[value] = 0;
+				handleSelectChange();
+			});
+		}}
+	/>
 
 	<div class="elements selecto-area" id="selecto1">
 		<div class="left">
@@ -92,11 +98,7 @@
 		</div>
 		<div class="right">
 			<div class="labels">
-				<p class="timestamp">- 12:00 am</p>
 				<Timestamp />
-				<p class="timestamp">- 12:00 pm</p>
-				<Timestamp />
-				<p class="timestamp">- 12:00 am</p>
 			</div>
 			<div>
 				{#each Array(7) as _, i}
@@ -107,12 +109,11 @@
 					</div>
 				{/each}
 			</div>
-            <Match></Match>
 		</div>
 	</div>
-    <div class='togglediv'>
-        <Input class='toggle' id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe}/>
-    </div>
+	<div class="togglediv">
+		<Input class="toggle" id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe} />
+	</div>
 </div>
 
 <style>
@@ -139,7 +140,7 @@
 		text-align: left;
 	}
 
-    .togglediv { 
+	.togglediv {
 		width: 15%;
 	}
 
@@ -155,7 +156,7 @@
 		border-color: #e6b400;
 	}
 
-    .pref1 {
+	.pref1 {
 		--color: #4af;
 	}
 
