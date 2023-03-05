@@ -3,10 +3,11 @@
 	<a href="/timeline">Timeline</a>
 </nav>
 
-<script lang="ts">
+<script lang="ts" context='module'>
     import { Form, FormGroup, Input, Label, Button } from 'sveltestrap';
     import { goto } from '$app/navigation';
 
+    export let currUserEmail = '';
 
     function onSubmit(e) {
         e.preventDefault();
@@ -17,6 +18,8 @@
             const [key, value] = field;
             data[key] = value;
         }
+
+        currUserEmail = data['email'];
         // do something with data... store in database or stringified in local storage... stringifying availabilities might be hard
         goto(`/timeline`);
     }

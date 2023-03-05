@@ -10,7 +10,8 @@
 		timeslots.push(i);
 	}
 
-    let allTimeslots = new Array(672).fill(0);
+    // allTimeslots[i] = 1 if preferred, 0.5 if need be, and 0 if not available
+    export var allTimeslots = new Array(672).fill(0);
     let selectedTimeslots = [];
 
     function mergeTimeslots(list) {
@@ -20,7 +21,7 @@
 
 		for (let i = 0; i < list.length; i++) {
             let curr = list[i]
-            if (curr == 1 && newBlock) {
+            if (curr != 0 && newBlock) {
                 tuple[0] = i;
                 newBlock = false;
             }
@@ -57,10 +58,9 @@
             e.added.forEach((el) => {
                 el.classList.add('selected');
                 el.classList.add(ifNeedBe ? 'pref0' : 'pref1');
-                console.log(el.classList);
                 let value = el.classList[1];
                 selectedTimeslots.push(value);
-                allTimeslots[value] = 1;
+                allTimeslots[value] = ifNeedBe ? 0.5 : 1;
                 handleSelectChange();
             });
             e.removed.forEach((el) => {
