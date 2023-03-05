@@ -37,7 +37,9 @@
 
 
 <div id='title'>
-    <h1>Event: Example Meeting</h1>
+    <h1>Event: Sample 30-Minute Meeting</h1>
+
+    <h6>Organizer wants to know your availability from 6am - 10pm ET.</h6>
 </div>
 
 <br/>
