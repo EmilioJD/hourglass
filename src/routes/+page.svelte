@@ -20,7 +20,6 @@
         }
 
         currUserEmail = data['email'];
-        // do something with data... store in database or stringified in local storage... stringifying availabilities might be hard
         goto(`/timeline`);
     }
 </script>

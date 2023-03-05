@@ -9,12 +9,13 @@
     let ifNeedBe = false;
 	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-	for (let i = 0; i < 96; ++i) {
+	// only 6am - 10pm ET times (organizer)
+	for (let i = 0; i < 32; ++i) {
 		timeslots.push(i);
 	}
 
     // allTimeslots[i] = 1 if preferred, 0.5 if need be, and 0 if not available
-    export var allTimeslots = new Array(672).fill(0);
+    export var allTimeslots = new Array(224).fill(0);
     let selectedTimeslots = [];
 
 	function mergeTimeslots(list) {
@@ -43,6 +44,13 @@
 
 	function handleSelectChange() {
 		mergedTimeslots = mergeTimeslots(allTimeslots);
+	}
+
+	export function resetUserVars() {
+		// resetting user vars
+		allTimeslots = new Array(224).fill(0);
+		mergedTimeslots = [];
+		ifNeedBe = false;
 	}
 </script>
 
@@ -172,12 +180,11 @@
 	.cube {
 		display: inline-block;
 		border-radius: 0px;
-		width: 11px;
+		width: 33px;
 		height: 40px;
 		margin: 0px;
 		box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black;
 		background: #eee;
-		--color: #4af;
 	}
 
 	.button {

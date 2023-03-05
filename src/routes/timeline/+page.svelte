@@ -1,6 +1,6 @@
 <!-- adapted from https://daybrush.com/selecto/storybook/?path=/story/selecto--continue-to-select -->
 <script>
-	import Timeslots, { mergedTimeslots, allTimeslots } from './Timeslots.svelte';
+	import Timeslots, { mergedTimeslots, allTimeslots, resetUserVars } from './Timeslots.svelte';
 	import { currUserEmail } from '../+page.svelte';
 
 	import { goto } from '$app/navigation';
@@ -9,15 +9,27 @@
 
 	import { votesArray } from '../../stores';
 
+	const len = 7 * 32;
+
+	function updateVotes(votesArray) {
+		var summedArrays = votesArray.map(function (num, idx) {
+			return num + allTimeslots[idx];
+		});
+		resetUserVars();
+		return summedArrays;
+	}
+
+	function resetVotes() {
+		const empty = new Array(len).fill(0);
+		votesArray.update(n => empty)
+	}
+
 	function handleSave() {
-		// let email = writable(currUserEmail);
-		// console.log(email);
 		if (browser) {
 			window.localStorage.setItem(currUserEmail, allTimeslots.toString());
 		}
+		votesArray.update(n => updateVotes(n))
 		goto(`/`);
-		// slotVotes[0].update(n => n + 1)
-		// console.log(slotVotes[0]);
 	}
 </script>
 
@@ -32,6 +44,7 @@
         Print Selected Times
     </button>
 	<button on:click={() => handleSave()}>Save and Logout</button>
+	<button on:click={() => resetVotes()}>Reset Vote Count (don't press this)</button>
 </div>
 
 <style>
