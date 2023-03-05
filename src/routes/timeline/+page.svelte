@@ -7,7 +7,7 @@
 	import { browser } from '$app/environment';
  	import { writable } from 'svelte/store';
 
-	import { slotVotes } from '../../stores';
+	import { votesArray } from '../../stores';
 
 	function handleSave() {
 		// let email = writable(currUserEmail);
@@ -16,8 +16,8 @@
 			window.localStorage.setItem(currUserEmail, allTimeslots.toString());
 		}
 		goto(`/`);
-		slotVotes[0].update(n => n + 1)
-		console.log(slotVotes[0]);
+		// slotVotes[0].update(n => n + 1)
+		// console.log(slotVotes[0]);
 	}
 </script>
 
