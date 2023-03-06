@@ -156,6 +156,9 @@
 		margin-top: 30px;
 	}
 	.location{
-		margin-top:5px;
+		margin-top:20px;
+		display: flex;
+    	padding-left: 600px;
+   	 	gap: 20px;
 	}
 </style>
