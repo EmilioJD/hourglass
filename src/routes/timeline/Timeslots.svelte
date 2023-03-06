@@ -2,6 +2,7 @@
 	import { Input } from 'sveltestrap';
 	import Selecto from 'svelte-selecto';
 	import Timestamp from './labels/Timestamp.svelte';
+	import { resetUserTimezone } from '../+page.svelte';
 
 	const timeslots = [];
 
@@ -57,6 +58,7 @@
 		allTimeslots = new Array(224).fill(0);
 		mergedTimeslots = [];
 		ifNeedBe = false;
+		resetUserTimezone();
 	}
 </script>
 
@@ -104,7 +106,7 @@
 				{#each Array(7) as _, i}
 					<div>
 						{#each timeslots as slot}
-							<div class="cube {96 * i + slot} " />
+							<div class="cube {32 * i + slot} " />
 						{/each}
 					</div>
 				{/each}
