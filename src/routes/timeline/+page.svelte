@@ -39,9 +39,9 @@
 		votesArray.update((n) => updateVotes(n));
 		var timerEnd = new Date();
 		var timeTaken = timerStart ? timerEnd.getTime() - timerStart.getTime() : 0;
-		console.log(`Name: ${currUserName}, Time Taken (in ms): ${timeTaken}`);
+		console.log(`Name: ${currUserName}, Start Time: ${timerStart.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}, End Time: ${timerEnd.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}, Duration (in ms): ${timeTaken}`);
 		if (browser) {
-			window.localStorage.setItem(currUserName, timeTaken);
+			window.localStorage.setItem(currUserName, JSON.stringify({'startTime': timerStart.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' }), 'endTime': timerEnd.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' }), 'duration': timeTaken}));
 		}
 		goto(`/`);
 	}
@@ -55,7 +55,7 @@
 
 <div class="app">
 	<div class="logo">
-		<!-- <img src={img} alt="hourglass" /> -->
+		<img src={img} alt="hourglass" />
 		<h1>Hourglass</h1>
 	</div>
 

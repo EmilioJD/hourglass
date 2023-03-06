@@ -57,7 +57,6 @@
           name="name"
           id="name"
           placeholder="Name"
-          bind:value={currUserName}
           required
         />
     </FormGroup>
