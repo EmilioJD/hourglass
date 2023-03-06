@@ -36,7 +36,8 @@
     // var disabled = currUserName.length == 0;
 </script>
 
-<div id="app">
+<div class="app">
+  <div class='container'>
 	<div id="title">
 		<br />
 		<h1>Event: Sample 30-Minute Meeting</h1>
@@ -46,7 +47,7 @@
 
 <br/>
 
-<div id='form'>
+<div class='form'>
   
   <Form on:submit={(e) => {onSubmit(e)}}>
     <FormGroup>
@@ -159,3 +160,31 @@
       <Button type='submit' color='primary'>Next: Enter Your Availability</Button>
   </Form>
 </div>
+</div>
+</div>
+
+<style>
+  .app {
+		/* position: relative; */
+		min-height: 100%;
+		padding: 10px 20px;
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+		color: #cbcbcb;
+    background-color: #090c17;
+	}
+
+  .container {
+    width: 90%;
+    height: 100vh;
+    color: #cbcbcb;
+    background-color: #090c17;
+
+  }
+
+  .form {
+    text-align: left;
+  }
+</style>
