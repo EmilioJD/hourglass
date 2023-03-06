@@ -7,13 +7,15 @@
     import { Form, FormGroup, Input, Label, Button } from 'sveltestrap';
     import { goto } from '$app/navigation';
 
-    var currUserName = ''
-    export var currUserEmail = '';
+    export var currUserName = ''
+    // export var currUserEmail = '';
     export let timeZone = '(GMT-05:00) Eastern Time (US & Canada)';
 
     export function resetUserTimezone() {
       timeZone = '(GMT-05:00) Eastern Time (US & Canada)';
     }
+
+    export var timerStart;
 
     function onSubmit(e) {
         e.preventDefault();
@@ -24,13 +26,15 @@
             const [key, value] = field;
             data[key] = value;
         }
-
     
         timeZone = data["timeZone"];
         
-        currUserEmail = data['email'];
+        currUserName = data['name'];
+        timerStart = new Date();
         goto(`/timeline`);
     }
+
+    // var disabled = currUserName.length == 0;
 </script>
 
 <style>
@@ -54,8 +58,6 @@
 
 <br/>
 
-<h1>{currUserName}</h1>
-
 <div id='form'>
   
   <Form on:submit={(e) => {onSubmit(e)}}>
@@ -66,9 +68,11 @@
           name="name"
           id="name"
           placeholder="Name"
+          bind:value={currUserName}
+          required
         />
     </FormGroup>
-    <FormGroup>
+    <!-- <FormGroup>
       <Label for="email">Email*</Label>
       <Input
         type="email"
@@ -76,7 +80,7 @@
         id="email"
         placeholder="Email"
       />
-    </FormGroup>
+    </FormGroup> -->
     <FormGroup>
         <Label for="timeZone">Time Zone*</Label>
         <Input bind:value={timeZone} type="select" name="timeZone" id="timeZone">
@@ -164,6 +168,6 @@
             <option data-time-zone-id="82" data-gmt-adjustment="GMT+13:00">(GMT+13:00) Nuku'alofa</option>
         </Input>
     </FormGroup>
-    <Button type='submit' color='primary' >Next: Enter Your Availability</Button>
+      <Button type='submit' color='primary'>Next: Enter Your Availability</Button>
   </Form>
 </div>

@@ -50,17 +50,22 @@
         }
         return res;
     }
+    const top = getTopTimeslots(votes, 3);
     const timesEST = loadTimesEST();
     const timesLocal = loadTimesLocal(timesEST)
 </script>
 
 <div class='left'>
     <h4>Current Top 3 Times ({timeZone.slice(12)}): </h4>
-    <div class='timesBox'>
-    {#each Array(3) as _, i}
-        <p>{i+1}. {timesLocal[i]}</p>
-    {/each}
-    </div>
+    {#if top[0] == 0}
+        <p>You are the first to respond to this poll!</p>
+    {:else}
+        <div class='timesBox'>
+        {#each Array(3) as _, i}
+            <p>{i+1}. {timesLocal[i]}</p>
+        {/each}
+        </div>
+    {/if}
 </div>
 
 <style>

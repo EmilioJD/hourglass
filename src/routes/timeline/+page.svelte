@@ -3,7 +3,7 @@
 	import Timeslots, { mergedTimeslots, allTimeslots, resetUserVars } from './Timeslots.svelte';
 	import { Button } from 'sveltestrap';
 	import Results from './Results.svelte';
-	import { currUserEmail } from '../+page.svelte';
+	import { currUserName, timerStart } from '../+page.svelte';
 
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
@@ -31,10 +31,16 @@
 	// console.log(timeZoneOffset);
 
 	function handleSave() {
-		if (browser) {
-			window.localStorage.setItem(currUserEmail, allTimeslots.toString());
-		}
+		// if (browser) {
+		// 	window.localStorage.setItem(currUserName, allTimeslots.toString());
+		// }
 		votesArray.update(n => updateVotes(n))
+		var timerEnd = new Date();
+		var timeTaken = timerEnd.getTime() - timerStart.getTime();
+		console.log(`Name: ${currUserName}, Time Taken (in ms): ${timeTaken}`);
+		if (browser) {
+			window.localStorage.setItem(currUserName, timeTaken);
+		}
 		goto(`/`);
 	}
 </script>
