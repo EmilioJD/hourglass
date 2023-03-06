@@ -55,10 +55,10 @@
 	.timestamp {
 		margin-left: 0px;
 		margin-top: 0;
-		margin-right: 2.5px;
+		margin-right: 2.5em;
 		margin-bottom: 2px;
 		writing-mode: tb-rl;
 		transform: rotate(180deg);
-		font-size: 13px;
+		font-size: 15px;
 	}
 </style>

@@ -79,7 +79,7 @@
 			<div class="labels">
 				<Timestamp />
 			</div>
-			<div>
+			<div class="cc">
 				{#each Array(7) as _, i}
 					<div class="cubeContainer">
 						<div class="line">
@@ -98,6 +98,7 @@
 	.container {
 		max-width: 70%;
 		font-size: 20px;
+		margin-bottom: -4em;
 	}
 
 	.logo {
@@ -109,20 +110,10 @@
 		text-align: left;
 	}
 
-	.labels {
-		display: flex;
-		justify-content: center;
-		margin: auto;
-		width: auto;
-		margin-left: 0;
-		margin-bottom: 10;
-		text-align: left;
-	}
-
 	.togglediv {
 		display: flex;
 		gap: 10px;
-		width: 30%;
+		width: 35%;
 		margin-bottom: 0px;
 		font-size: 20px;
 	}
@@ -147,10 +138,25 @@
 		--color: #e6b400;
 	}
 
+	.cc {
+		position: absolute;
+	}
+
+	.labels {
+		display: flex;
+		justify-content: center;
+		/* gap: 3em; */
+		margin: auto;
+		width: auto;
+		margin-left: -0.6em;
+		margin-bottom: 10;
+		text-align: left;
+	}
+
 	.timestamp {
 		margin-left: 0px;
 		margin-top: 0;
-		margin-right: 2.5px;
+		margin-right: 20em;
 		margin-bottom: 2px;
 		writing-mode: tb-rl;
 		transform: rotate(180deg);
@@ -231,12 +237,12 @@
 	}
 
 	.left {
-		margin-top: 4.7em;
+		margin-top: 3.4em;
 		margin-right: 1em;
 	}
 
 	.day {
-		margin-bottom: 1.4em;
+		margin-bottom: 1.5em;
 	}
 
 	.selecto-area {

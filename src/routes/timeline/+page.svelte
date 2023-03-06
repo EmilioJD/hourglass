@@ -36,7 +36,7 @@
 		// }
 		votesArray.update(n => updateVotes(n))
 		var timerEnd = new Date();
-		var timeTaken = timerEnd.getTime() - timerStart.getTime();
+		var timeTaken = timerStart ? timerEnd.getTime() - timerStart.getTime() : 0;
 		console.log(`Name: ${currUserName}, Time Taken (in ms): ${timeTaken}`);
 		if (browser) {
 			window.localStorage.setItem(currUserName, timeTaken);
@@ -73,7 +73,7 @@
 	h1 {
 		font-size: 70px;
 		margin-top: 20px;
-		margin-bottom: 50px;
+		margin-bottom: 20px;
 	}
 	.app {
 		position: relative;
@@ -89,7 +89,7 @@
 	}
 
 	.saveDiv {
-		margin-right: 5.2em;
+		margin-right: 17.6em;
 		text-align: right;
 		margin-bottom: -30px;
 	}
