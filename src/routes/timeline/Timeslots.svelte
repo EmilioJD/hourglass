@@ -32,7 +32,6 @@
 		preferred = true;
 		resetUserTimezone();
 	}
-
 </script>
 
 <div class="container">
@@ -82,10 +81,12 @@
 			</div>
 			<div>
 				{#each Array(7) as _, i}
-					<div>
-						{#each timeslots as slot}
-							<div class="cube {32 * i + slot} " />
-						{/each}
+					<div class="cubeContainer">
+						<div class="line">
+							{#each timeslots as slot}
+								<div class="cube {32 * i + slot} " />
+							{/each}
+						</div>
 					</div>
 				{/each}
 			</div>
@@ -164,8 +165,40 @@
 		width: 30px;
 		height: 40px;
 		margin: 0px;
-		box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black;
-		background: #eee;
+		/* box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black; */
+		/* background: #eee; */
+		position: relative;
+	}
+	.cube:after {
+		content: '';
+		height: 20%; 
+		width: 1px;
+
+		position: absolute;
+		right: 0;
+		top: 40%;
+
+		background-color: #000000;
+	}
+
+	.cubeContainer {
+		position: relative;
+		margin-top:20px;
+	}
+	.line {
+		display: flex;
+		justify-content: space-between;
+		position: relative; 
+	}
+	.cubeContainer:before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 0;
+		border-top: 1px solid black;
+		background: black;
+		width: 100%;
+		transform: translateY(-50%);
 	}
 
 	.button {
