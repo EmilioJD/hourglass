@@ -60,6 +60,13 @@
 	</div>
 
 	<h3>Select Your Availability</h3>
+	<h6>By default, you can indicate your preferred availability but you can also toggle 
+		times that can work "Only if need be." 
+	</h6>
+	<h6>
+		Additionally, see the top times that 
+		other people in your group have selected below.
+	</h6>
 	<div class="saveDiv">
 		<Button class="save" color="success" on:click={() => handleSave()}>Save and Logout</Button>
 	</div>
