@@ -1,6 +1,7 @@
 <!-- adapted from https://daybrush.com/selecto/storybook/?path=/story/selecto--continue-to-select -->
 <script>
 	import Timeslots, { mergedTimeslots, allTimeslots, resetUserVars } from './Timeslots.svelte';
+	import { Button } from 'sveltestrap';
 	import Results from './Results.svelte';
 	import { currUserEmail } from '../+page.svelte';
 
@@ -37,21 +38,28 @@
 		goto(`/`);
 	}
 </script>
-
+<!-- 
 <nav>
 	<a href="/">Start</a>
 	<a href="/timeline">Timeline</a>
-</nav>
+</nav> -->
 
 <div class="app">
+	<h3>Select Your Availability</h3>
+	<div class='saveDiv'>
+		<Button class='save' color='success' on:click={() => handleSave()}>Save and Logout</Button>
+	</div>
+	<Timeslots />
+	<hr/>
 	<Results/>
-	<Timeslots></Timeslots>
 	<br/>
-	<button on:click={()=>{console.log(mergedTimeslots, allTimeslots)}}>
+	<!-- <button on:click={()=>{console.log(mergedTimeslots, allTimeslots)}}>
         Print Selected Times
-    </button>
-	<button on:click={() => handleSave()}>Save and Logout</button>
-	<button on:click={() => resetVotes()}>Reset Vote Count (don't press this)</button>
+    </button> -->
+	<!-- <button on:click={() => handleSave()}>Save and Logout</button> -->
+	<br/>
+	<br/>
+	<button on:click={() => resetVotes()}>Reset Vote Count (press this + comment button out before presentation)</button>
 </div>
 
 <style>
@@ -64,5 +72,11 @@
 		align-items: center;
 		justify-content: center;
 		box-sizing: border-box;
+	}
+
+	.saveDiv {
+		margin-right: 5.2em;
+		text-align: right;
+		margin-bottom: -30px;
 	}
 </style>
