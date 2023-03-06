@@ -1,6 +1,7 @@
 <!-- adapted from https://daybrush.com/selecto/storybook/?path=/story/selecto--continue-to-select -->
 <script>
 	import Timeslots, { mergedTimeslots, allTimeslots, resetUserVars } from './Timeslots.svelte';
+	import Results from './Results.svelte';
 	import { currUserEmail } from '../+page.svelte';
 
 	import { goto } from '$app/navigation';
@@ -43,8 +44,10 @@
 </nav>
 
 <div class="app">
+	<Results/>
 	<Timeslots></Timeslots>
-	<button on:click={()=>{console.log(mergedTimeslots)}}>
+	<br/>
+	<button on:click={()=>{console.log(mergedTimeslots, allTimeslots)}}>
         Print Selected Times
     </button>
 	<button on:click={() => handleSave()}>Save and Logout</button>
@@ -57,7 +60,7 @@
 		min-height: 100%;
 		padding: 10px 20px;
 		text-align: center;
-		display: flex;
+		/* display: flex; */
 		align-items: center;
 		justify-content: center;
 		box-sizing: border-box;

@@ -2,6 +2,7 @@
 	import { Input } from 'sveltestrap';
 	import Selecto from 'svelte-selecto';
 	import Timestamp from './labels/Timestamp.svelte';
+	import { resetUserTimezone } from '../+page.svelte';
 	import Location, { mergeTimeslots } from './Location.svelte';
 
 	const timeslots = [];
@@ -29,6 +30,7 @@
 		allTimeslots = new Array(224).fill(0);
 		mergedTimeslots = [];
 		ifNeedBe = false;
+		resetUserTimezone();
 	}
 
 </script>

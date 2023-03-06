@@ -8,7 +8,11 @@
     import { goto } from '$app/navigation';
 
     export let currUserEmail = '';
-    export let timeZone = '';
+    export let timeZone = '(GMT-05:00) Eastern Time (US & Canada)';
+
+    export function resetUserTimezone() {
+      timeZone = '(GMT-05:00) Eastern Time (US & Canada)';
+    }
 
     function onSubmit(e) {
         e.preventDefault();
@@ -71,7 +75,7 @@
     </FormGroup>
     <FormGroup>
         <Label for="timeZone">Time Zone</Label>
-        <Input type="select" name="timeZone" id="timeZone">
+        <Input bind:value={timeZone} type="select" name="timeZone" id="timeZone">
             <option data-time-zone-id="2" data-gmt-adjustment="GMT-11:00">(GMT-11:00) Midway Island, Samoa</option>
             <option data-time-zone-id="3" data-gmt-adjustment="GMT-10:00">(GMT-10:00) Hawaii</option>
             <option data-time-zone-id="1" data-gmt-adjustment="GMT-12:00">(GMT-12:00) International Date Line West</option>
