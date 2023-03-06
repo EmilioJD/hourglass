@@ -5,6 +5,7 @@
 <script lang="ts" context="module">
 	import { Form, FormGroup, Input, Label, Button } from 'sveltestrap';
 	import { goto } from '$app/navigation';
+    let img = '../../../hourglass.gif';
 
     export var currUserName = ''
     // export var currUserEmail = '';
@@ -38,6 +39,10 @@
 
 <div class="app">
   <div class='container'>
+    <div class="logo">
+      <img src={img} alt="hourglass" />
+      <h1>Hourglass</h1>
+    </div>
 	<div id="title">
 		<br />
 		<h1>Event: Sample 30-Minute Meeting</h1>
@@ -186,4 +191,16 @@
   .form {
     text-align: left;
   }
+
+  .logo {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 20px;
+	}
+  
+  img {
+		width: 100px;
+		height: 100px;
+	}
 </style>
