@@ -45,6 +45,7 @@
 </nav> -->
 
 <div class="app">
+	<h1>Hourglass</h1>
 	<h3>Select Your Availability</h3>
 	<div class='saveDiv'>
 		<Button class='save' color='success' on:click={() => handleSave()}>Save and Logout</Button>
@@ -63,6 +64,11 @@
 </div>
 
 <style>
+	h1 {
+		font-size: 70px;
+		margin-top: 20px;
+		margin-bottom: 50px;
+	}
 	.app {
 		position: relative;
 		min-height: 100%;
@@ -72,11 +78,16 @@
 		align-items: center;
 		justify-content: center;
 		box-sizing: border-box;
+		color: #cbcbcb;
+    	background-color: #090c17;
 	}
 
 	.saveDiv {
 		margin-right: 5.2em;
 		text-align: right;
 		margin-bottom: -30px;
+	}
+	hr {
+		margin-top:100px;
 	}
 </style>

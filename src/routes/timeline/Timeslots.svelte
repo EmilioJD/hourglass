@@ -96,7 +96,8 @@
 
 <style>
 	.container {
-		max-width: 90%;
+		max-width: 70%;
+		font-size: 20px;
 	}
 
 	.logo {
@@ -121,8 +122,9 @@
 	.togglediv {
 		display: flex;
 		gap: 10px;
-		width: 20%;
+		width: 30%;
 		margin-bottom: 0px;
+		font-size: 20px;
 	}
 
 	.toggle {
@@ -178,7 +180,7 @@
 		right: 0;
 		top: 40%;
 
-		background-color: #000000;
+		background-color: white;
 	}
 
 	.cubeContainer {
@@ -195,8 +197,8 @@
 		position: absolute;
 		top: 50%;
 		left: 0;
-		border-top: 1px solid black;
-		background: black;
+		border-top: 1px solid white;
+		background: white;
 		width: 100%;
 		transform: translateY(-50%);
 	}
