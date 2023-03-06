@@ -12,6 +12,8 @@
 	import { votesArray } from '../../stores';
 
 	let img = '../../../hourglass.gif';
+	let myLoc = ['SEC'];
+	let loc = ['SEC', 'River', 'Quad', 'Remote'];
 
 	const len = 7 * 32;
 
@@ -39,9 +41,34 @@
 		votesArray.update((n) => updateVotes(n));
 		var timerEnd = new Date();
 		var timeTaken = timerStart ? timerEnd.getTime() - timerStart.getTime() : 0;
-		console.log(`Name: ${currUserName}, Start Time: ${timerStart.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}, End Time: ${timerEnd.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}, Duration (in ms): ${timeTaken}`);
+		console.log(
+			`Name: ${currUserName}, Start Time: ${timerStart.toLocaleString('en-US', {
+				hour: 'numeric',
+				minute: 'numeric',
+				second: 'numeric'
+			})}, End Time: ${timerEnd.toLocaleString('en-US', {
+				hour: 'numeric',
+				minute: 'numeric',
+				second: 'numeric'
+			})}, Duration (in ms): ${timeTaken}`
+		);
 		if (browser) {
-			window.localStorage.setItem(currUserName, JSON.stringify({'startTime': timerStart.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' }), 'endTime': timerEnd.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' }), 'duration': timeTaken}));
+			window.localStorage.setItem(
+				currUserName,
+				JSON.stringify({
+					startTime: timerStart.toLocaleString('en-US', {
+						hour: 'numeric',
+						minute: 'numeric',
+						second: 'numeric'
+					}),
+					endTime: timerEnd.toLocaleString('en-US', {
+						hour: 'numeric',
+						minute: 'numeric',
+						second: 'numeric'
+					}),
+					duration: timeTaken
+				})
+			);
 		}
 		goto(`/`);
 	}
@@ -60,17 +87,24 @@
 	</div>
 
 	<h3>Select Your Availability</h3>
-	<h6>By default, you can indicate your preferred availability but you can also toggle 
-		times that can work "Only if need be." 
-	</h6>
 	<h6>
-		Additionally, see the top times that 
-		other people in your group have selected below.
+		By default, you can indicate your preferred availability but you can also toggle times that can
+		work "Only if need be."
 	</h6>
+	<h6>Additionally, see the top times that other people in your group have selected below.</h6>
 	<div class="saveDiv">
 		<Button class="save" color="success" on:click={() => handleSave()}>Save and Logout</Button>
 	</div>
 	<Timeslots />
+	<div class="location">
+		<p>Location:</p>
+		{#each loc as chosen}
+			<label>
+				<input type="checkbox" bind:group={myLoc} value={chosen} />
+				{chosen}
+			</label>
+		{/each}
+	</div>
 	<hr />
 	<Results />
 	<br />
@@ -119,6 +153,9 @@
 		margin-bottom: -30px;
 	}
 	hr {
-		margin-top: 100px;
+		margin-top: 30px;
+	}
+	.location{
+		margin-top:5px;
 	}
 </style>
