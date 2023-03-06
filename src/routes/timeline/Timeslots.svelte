@@ -7,7 +7,7 @@
 
 	const timeslots = [];
 
-	let ifNeedBe = false;
+	let preferred = true;
 	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 	// only 6am - 10pm ET times (organizer)
@@ -29,13 +29,18 @@
 		// resetting user vars
 		allTimeslots = new Array(224).fill(0);
 		mergedTimeslots = [];
-		ifNeedBe = false;
+		preferred = true;
 		resetUserTimezone();
 	}
 
 </script>
 
 <div class="container">
+	<div class="togglediv">
+		Only If Need Be 
+		<Input class="toggle" id="c3" type="switch" bind:checked={preferred} />
+		Preferred
+	</div>
 	<Selecto
 		dragContainer={'.elements'}
 		selectableTargets={['.selecto-area .cube']}
@@ -47,10 +52,10 @@
 		on:select={({ detail: e }) => {
 			e.added.forEach((el) => {
 				el.classList.add('selected');
-				el.classList.add(ifNeedBe ? 'pref0' : 'pref1');
+				el.classList.add(preferred ? 'pref1' : 'pref0');
 				let value = el.classList[1];
 				selectedTimeslots.push(value);
-				allTimeslots[value] = ifNeedBe ? 0.5 : 1;
+				allTimeslots[value] = preferred ? 1 : 0.5;
 				handleSelectChange();
 			});
 			e.removed.forEach((el) => {
@@ -86,10 +91,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="togglediv">
-		<Input class="toggle" id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe} />
-	</div>
-	<!-- <Location /> -->
 </div>
 
 <style>
@@ -117,7 +118,10 @@
 	}
 
 	.togglediv {
-		width: 15%;
+		display: flex;
+		gap: 10px;
+		width: 20%;
+		margin-bottom: 0px;
 	}
 
 	.toggle {
@@ -203,6 +207,7 @@
 	.selecto-area {
 		/* width: 150%; */
 		padding: 50px;
+		margin-top: 10px;
 	}
 
 	#selecto1 .cube {

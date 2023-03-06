@@ -29,9 +29,9 @@
     }
 
     function convertDateToTimezone(date, offset) {
-        console.log(offset);
-        var newDate = new Date(date.getTime())
-        return new Date(newDate.setTime(newDate.getTime() + offset*60*60*1000))
+        var newDate = new Date(date.getTime());
+        var res = new Date(newDate.setTime(newDate.getTime() + offset*60*60*1000));
+        return res.toLocaleDateString('en-US', { weekday: 'long', hour: 'numeric', minute: 'numeric' })
     }
 
     function loadTimesEST() {
@@ -54,8 +54,22 @@
     const timesLocal = loadTimesLocal(timesEST)
 </script>
 
-<div>
+<div class='left'>
+    <h4>Current Top 3 Times ({timeZone.slice(12)}): </h4>
+    <div class='timesBox'>
     {#each Array(3) as _, i}
-        <p>{timesLocal[i]}</p>
+        <p>{i+1}. {timesLocal[i]}</p>
     {/each}
+    </div>
 </div>
+
+<style>
+
+    .left {
+        text-align: left;
+    }
+    .timesBox {
+        display: flex;
+        gap: 30px;
+    }
+</style>

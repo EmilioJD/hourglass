@@ -1,13 +1,14 @@
-<nav>
+<!-- <nav>
 	<a href="/">Start</a>
 	<a href="/timeline">Timeline</a>
-</nav>
+</nav> -->
 
 <script lang="ts" context='module'>
     import { Form, FormGroup, Input, Label, Button } from 'sveltestrap';
     import { goto } from '$app/navigation';
 
-    export let currUserEmail = '';
+    var currUserName = ''
+    export var currUserEmail = '';
     export let timeZone = '(GMT-05:00) Eastern Time (US & Canada)';
 
     export function resetUserTimezone() {
@@ -45,18 +46,21 @@
 
 
 <div id='title'>
+  <br/>
     <h1>Event: Sample 30-Minute Meeting</h1>
 
-    <h6>Organizer wants to know your availability from 6am - 10pm ET.</h6>
+    <h6>The organizer wants to know your availability from 6am - 10pm ET.</h6>
 </div>
 
 <br/>
+
+<h1>{currUserName}</h1>
 
 <div id='form'>
   
   <Form on:submit={(e) => {onSubmit(e)}}>
     <FormGroup>
-        <Label for="name">Name</Label>
+        <Label for="name">Name*</Label>
         <Input
           type="text"
           name="name"
@@ -65,7 +69,7 @@
         />
     </FormGroup>
     <FormGroup>
-      <Label for="email">Email</Label>
+      <Label for="email">Email*</Label>
       <Input
         type="email"
         name="email"
@@ -74,23 +78,23 @@
       />
     </FormGroup>
     <FormGroup>
-        <Label for="timeZone">Time Zone</Label>
+        <Label for="timeZone">Time Zone*</Label>
         <Input bind:value={timeZone} type="select" name="timeZone" id="timeZone">
+            <option data-time-zone-id="5" data-gmt-adjustment="GMT-08:00">(GMT-08:00) Pacific Time (US & Canada)</option>
+            <option data-time-zone-id="9" data-gmt-adjustment="GMT-07:00">(GMT-07:00) Mountain Time (US & Canada)</option>
+            <option data-time-zone-id="11" data-gmt-adjustment="GMT-06:00">(GMT-06:00) Central Time (US & Canada)</option>
+            <option data-time-zone-id="15" data-gmt-adjustment="GMT-05:00">(GMT-05:00) Eastern Time (US & Canada)</option>
             <option data-time-zone-id="2" data-gmt-adjustment="GMT-11:00">(GMT-11:00) Midway Island, Samoa</option>
             <option data-time-zone-id="3" data-gmt-adjustment="GMT-10:00">(GMT-10:00) Hawaii</option>
             <option data-time-zone-id="1" data-gmt-adjustment="GMT-12:00">(GMT-12:00) International Date Line West</option>
             <option data-time-zone-id="4" data-gmt-adjustment="GMT-09:00">(GMT-09:00) Alaska</option>
-            <option data-time-zone-id="5" data-gmt-adjustment="GMT-08:00">(GMT-08:00) Pacific Time (US & Canada)</option>
             <option data-time-zone-id="6" data-gmt-adjustment="GMT-08:00">(GMT-08:00) Tijuana, Baja California</option>
             <option data-time-zone-id="7" data-gmt-adjustment="GMT-07:00">(GMT-07:00) Arizona</option>
             <option data-time-zone-id="8" data-gmt-adjustment="GMT-07:00">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-            <option data-time-zone-id="9" data-gmt-adjustment="GMT-07:00">(GMT-07:00) Mountain Time (US & Canada)</option>
             <option data-time-zone-id="10" data-gmt-adjustment="GMT-06:00">(GMT-06:00) Central America</option>
-            <option data-time-zone-id="11" data-gmt-adjustment="GMT-06:00">(GMT-06:00) Central Time (US & Canada)</option>
             <option data-time-zone-id="12" data-gmt-adjustment="GMT-06:00">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
             <option data-time-zone-id="13" data-gmt-adjustment="GMT-06:00">(GMT-06:00) Saskatchewan</option>
             <option data-time-zone-id="14" data-gmt-adjustment="GMT-05:00">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
-            <option data-time-zone-id="15" data-gmt-adjustment="GMT-05:00">(GMT-05:00) Eastern Time (US & Canada)</option>
             <option data-time-zone-id="16" data-gmt-adjustment="GMT-05:00">(GMT-05:00) Indiana (East)</option>
             <option data-time-zone-id="17" data-gmt-adjustment="GMT-04:00">(GMT-04:00) Atlantic Time (Canada)</option>
             <option data-time-zone-id="18" data-gmt-adjustment="GMT-04:00">(GMT-04:00) Caracas, La Paz</option>
@@ -160,6 +164,6 @@
             <option data-time-zone-id="82" data-gmt-adjustment="GMT+13:00">(GMT+13:00) Nuku'alofa</option>
         </Input>
     </FormGroup>
-    <Button type='submit' color='primary'>Next: Enter Your Availability</Button>
+    <Button type='submit' color='primary' >Next: Enter Your Availability</Button>
   </Form>
 </div>
