@@ -1,13 +1,13 @@
 <script>
-	import { timeZone } from '../../+page.svelte'
-	
+	import { timeZone } from '../../+page.svelte';
+
 	function arrShift(shift, arr) {
 		const len = arr.length;
 		arr.push(...arr.splice(0, ((-shift % len) + len) % len));
 		return arr;
 	}
 
-	let timeZoneOffset = parseInt(timeZone.substr(4,3)) + 5;
+	let timeZoneOffset = parseInt(timeZone.substr(4, 3)) + 5;
 	let times = [
 		'12am',
 		'1am',
@@ -36,6 +36,14 @@
 	];
 	let timeLabels = arrShift(-timeZoneOffset - 6, times);
 	timeLabels = timeLabels.slice(0, 17);
+
+	let indexOfEleven = timeLabels.indexOf('11pm');
+
+	if (indexOfEleven >= 0) {
+		for (let i = indexOfEleven + 1; i < timeLabels.length; i++) {
+			timeLabels[i] = timeLabels[i] + ' +1';
+		}
+	}
 
 </script>
 

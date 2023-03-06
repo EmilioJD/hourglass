@@ -26,8 +26,7 @@
 	import { timeZone } from '../+page.svelte'
 
 	let timeZoneOffset = parseInt(timeZone.substr(4,3)) + 5;
-	console.log(timeZoneOffset);
-	//this variable needs to be passed into Timestamp
+	// console.log(timeZoneOffset);
 
 	function handleSave() {
 		if (browser) {
@@ -45,7 +44,7 @@
 
 <div class="app">
 	<Timeslots></Timeslots>
-	<button on:click={()=>{console.log(mergedTimeslots, allTimeslots)}}>
+	<button on:click={()=>{console.log(mergedTimeslots)}}>
         Print Selected Times
     </button>
 	<button on:click={() => handleSave()}>Save and Logout</button>

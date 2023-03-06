@@ -2,10 +2,11 @@
 	import { Input } from 'sveltestrap';
 	import Selecto from 'svelte-selecto';
 	import Timestamp from './labels/Timestamp.svelte';
+	import Location, { mergeTimeslots } from './Location.svelte';
 
 	const timeslots = [];
 
-    let ifNeedBe = false;
+	let ifNeedBe = false;
 	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 	// only 6am - 10pm ET times (organizer)
@@ -13,38 +14,9 @@
 		timeslots.push(i);
 	}
 
-    // allTimeslots[i] = 1 if preferred, 0.5 if need be, and 0 if not available
-    export var allTimeslots = new Array(224).fill(0);
-    let selectedTimeslots = [];
-
-	function mergeTimeslots(list) {
-		let newBlock = true;
-		let tuples = [];
-		let tuple = [0, 0];
-
-		for (let i = 0; i < list.length; i++) {
-			let curr = list[i];
-			if (curr == 1 && newBlock) {
-				tuple[0] = i;
-				newBlock = false;
-
-				//the case where they are only available at the last block
-				if (i == list.length - 1) {
-					tuple[1] = i;
-					let newTuple = [tuple[0], tuple[1]];
-					tuples.push(newTuple);
-				}
-				//this is the location handling step
-			} else if (curr == 0 && newBlock) {
-			} else if ((curr == 0 && !newBlock) || i == list.length - 1) {
-				tuple[1] = i;
-				let newTuple = [tuple[0], tuple[1]];
-				tuples.push(newTuple);
-				newBlock = true;
-			}
-		}
-		return tuples;
-	}
+	// allTimeslots[i] = 1 if preferred, 0.5 if need be, and 0 if not available
+	export var allTimeslots = new Array(224).fill(0);
+	let selectedTimeslots = [];
 
 	export var mergedTimeslots = [];
 
@@ -58,29 +30,30 @@
 		mergedTimeslots = [];
 		ifNeedBe = false;
 	}
+
 </script>
 
 <div class="container">
-    <Selecto
-        dragContainer={'.elements'}
-        selectableTargets={['.selecto-area .cube']}
-        hitRate={1}
-        selectByClick={true}
-        selectFromInside={true}
-        continueSelect={true}
-        ratio={0}
-        on:select={({ detail: e }) => {
-            e.added.forEach((el) => {
-                el.classList.add('selected');
-                el.classList.add(ifNeedBe ? 'pref0' : 'pref1');
-                let value = el.classList[1];
-                selectedTimeslots.push(value);
-                allTimeslots[value] = ifNeedBe ? 0.5 : 1;
-                handleSelectChange();
-            });
-            e.removed.forEach((el) => {
-                el.classList.remove('selected');
-                el.classList.remove('pref1');
+	<Selecto
+		dragContainer={'.elements'}
+		selectableTargets={['.selecto-area .cube']}
+		hitRate={1}
+		selectByClick={true}
+		selectFromInside={true}
+		continueSelect={true}
+		ratio={0}
+		on:select={({ detail: e }) => {
+			e.added.forEach((el) => {
+				el.classList.add('selected');
+				el.classList.add(ifNeedBe ? 'pref0' : 'pref1');
+				let value = el.classList[1];
+				selectedTimeslots.push(value);
+				allTimeslots[value] = ifNeedBe ? 0.5 : 1;
+				handleSelectChange();
+			});
+			e.removed.forEach((el) => {
+				el.classList.remove('selected');
+				el.classList.remove('pref1');
 				el.classList.remove('pref0');
 				let value = el.classList[1];
 				selectedTimeslots = selectedTimeslots.filter((item) => item !== value);
@@ -104,7 +77,7 @@
 				{#each Array(7) as _, i}
 					<div>
 						{#each timeslots as slot}
-							<div class="cube {96 * i + slot} " />
+							<div class="cube {32 * i + slot} " />
 						{/each}
 					</div>
 				{/each}
@@ -114,6 +87,7 @@
 	<div class="togglediv">
 		<Input class="toggle" id="c3" type="switch" label="Only If Need Be" bind:checked={ifNeedBe} />
 	</div>
+	<!-- <Location /> -->
 </div>
 
 <style>
@@ -181,7 +155,7 @@
 	.cube {
 		display: inline-block;
 		border-radius: 0px;
-		width: 33px;
+		width: 30px;
 		height: 40px;
 		margin: 0px;
 		box-shadow: -1px 0px 0px 0px black, 1px 0px 0px 0px black;

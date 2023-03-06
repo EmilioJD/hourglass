@@ -3,7 +3,7 @@
 	<a href="/timeline">Timeline</a>
 </nav>
 
-<script lang="ts" context='module' context='module'>
+<script lang="ts" context='module'>
     import { Form, FormGroup, Input, Label, Button } from 'sveltestrap';
     import { goto } from '$app/navigation';
 
