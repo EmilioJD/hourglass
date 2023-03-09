@@ -34,7 +34,9 @@
 	}
 </script>
 
+<!-- Timeline Display Concept -->
 <div class="container">
+	<!-- Preference Concept -->
 	<div class="togglediv">
 		Only If Need Be 
 		<Input class="toggle" id="c3" type="switch" bind:checked={preferred} />
@@ -51,6 +53,7 @@
 		on:select={({ detail: e }) => {
 			e.added.forEach((el) => {
 				el.classList.add('selected');
+				// Preference Concept
 				el.classList.add(preferred ? 'pref1' : 'pref0');
 				let value = el.classList[1];
 				selectedTimeslots.push(value);
@@ -118,6 +121,7 @@
 		font-size: 20px;
 	}
 
+	/* Preference Concept */
 	.toggle {
 		background-color: #e6b400;
 		color: #e6b400;

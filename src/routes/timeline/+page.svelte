@@ -87,6 +87,7 @@
 	</div>
 
 	<h3>Select Your Availability</h3>
+	<!-- Preference Concept -->
 	<h6>
 		By default, you can indicate your preferred availability but you can also toggle times that can
 		work "Only if need be."
@@ -95,7 +96,9 @@
 	<div class="saveDiv">
 		<Button class="save" color="success" on:click={() => handleSave()}>Save and Logout</Button>
 	</div>
+	<!-- Timeline Display Concept -->
 	<Timeslots />
+	<!-- Preferred Location Concept -->
 	<div class="location">
 		<p>Location:</p>
 		{#each loc as chosen}
